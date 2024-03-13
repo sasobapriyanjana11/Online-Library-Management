@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="paneUserRegistration" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserRegistrationController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="600.0" opacity="0.76">
+         <image>
+            <Image url="@../assets/lib-anime2.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="184.0" layoutY="35.0" text="~Book Worm~" textFill="#070707">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="233.0" layoutY="79.0" text="Registration" textFill="#ff0e00">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="103.0" text="for user">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="169.0" text="User name:" textFill="#1b1a1a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="215.0" text="Email  :" textFill="#1b1a1a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="259.0" text="Password :" textFill="#1b1a1a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="307.0" text="Confirm password  :" textFill="#1b1a1a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUserName" layoutX="245.0" layoutY="167.0" onAction="#txtUserNameOnAction" prefHeight="24.0" prefWidth="244.0" promptText="user name" />
+      <TextField fx:id="txtEmail" layoutX="245.0" layoutY="213.0" onAction="#txtEmailOnAction" prefHeight="24.0" prefWidth="244.0" promptText="email" />
+      <PasswordField fx:id="PasswordFild" layoutX="245.0" layoutY="257.0" prefHeight="24.0" prefWidth="244.0" />
+      <PasswordField fx:id="PasswordConfirm" layoutX="245.0" layoutY="305.0" prefHeight="24.0" prefWidth="244.0" />
+      <TextField fx:id="txtPassword" layoutX="245.0" layoutY="257.0" onAction="#txtPasswordOnAction" prefHeight="24.0" prefWidth="244.0" promptText="password" />
+      <TextField fx:id="txtPasswordConfirm" layoutX="245.0" layoutY="305.0" onAction="#txtPasswordConfirmOnAction" prefHeight="24.0" prefWidth="244.0" promptText="confirm password" />
+      <JFXButton fx:id="btnRegister" buttonType="RAISED" layoutX="171.0" layoutY="379.0" onAction="#btnRegisterOnAction" prefHeight="31.0" prefWidth="263.0" style="-fx-background-color: brown;" text="Register" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="96.0" layoutY="438.0" text="Already have an account?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSignIn" layoutX="335.0" layoutY="437.0" onMouseClicked="#lblSignInOnAction" text="Sign in" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="452.0" layoutY="257.0">
+         <image>
+            <Image url="@../assets/icons/icons8-show-password-48.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="viewPass" layoutX="447.0" layoutY="257.0" onAction="#viewPassOnAction" prefHeight="24.0" prefWidth="31.0" />
+      <JFXButton fx:id="viewConfirmPass" layoutX="448.0" layoutY="305.0" onAction="#viewConfirmPassOnAction" prefHeight="24.0" prefWidth="31.0" />
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="453.0" layoutY="305.0">
+         <image>
+            <Image url="@../assets/icons/icons8-show-password-48.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

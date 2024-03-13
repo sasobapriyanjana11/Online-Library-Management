@@ -27,17 +27,6 @@ public class UserDAOImpl implements UserDAO {
     public boolean save(User user) throws SQLException {
         session = SessionFactoryConfig.getInstance().getSession();
       Transaction transaction = session.beginTransaction();
-//
-//        try {
-//            session.save(user);
-//            transaction.commit();
-//            return true;
-//        }catch (Exception e){
-//            transaction.rollback();
-//            return false;
-//        }finally {
-//            session.close();
-//        }
         session.save(user);
         transaction.commit();
         session.close();
@@ -49,18 +38,6 @@ public class UserDAOImpl implements UserDAO {
 
         session = SessionFactoryConfig.getInstance().getSession();
        Transaction transaction = session.beginTransaction();
-//
-//        try {
-//            session.update(user);
-//            transaction.commit();
-//            return true;
-//        }catch (Exception e){
-//            transaction.rollback();
-//            return false;
-//        }finally {
-//            session.close();
-//        }
-
         session.update(user);
         transaction.commit();
         session.close();
@@ -71,25 +48,22 @@ public class UserDAOImpl implements UserDAO {
     }
     @Override
     public boolean delete(String id) throws SQLException {
-        session = SessionFactoryConfig.getInstance().getSession();
+//        session = SessionFactoryConfig.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        User user=session.get(User.class,id);
+//        session.delete(user);
+//        transaction.commit();
+//        session.close();
+//        return  true;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+
         Transaction transaction = session.beginTransaction();
-//
-//        try {
-//                User user = session.get(User.class,id);
-//            session.delete(user);
-//            transaction.commit();
-//            return true;
-//        }catch (Exception e){
-//            transaction.rollback();
-//            return false;
-//        }finally {
-//            session.close();
-//        }
-        User user=session.get(User.class,id);
-        session.delete(user);
+
+        session.createNativeQuery("delete from user where user_id='"+id+"'",User.class).executeUpdate();
+
         transaction.commit();
         session.close();
-        return  true;
+        return true;
     }
     @Override
     public User search(String id) throws SQLException {
@@ -99,20 +73,24 @@ public class UserDAOImpl implements UserDAO {
         session.close();
         return user;
 
-//        User user=session.get(User.class,id);
-//        return user;
 
     }
     @Override
     public List<User> getAll() throws SQLException {
-        session =SessionFactoryConfig.getInstance().getSession();
-        Transaction transaction=session.beginTransaction();
 
-        String sql = "SELECT U FROM User AS U";
-        Query query = session.createQuery(sql);
-        List<User> list = query.list();
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        List<User> list = session.createNativeQuery("SELECT * FROM user",User.class).list();
         transaction.commit();
         session.close();
         return list;
+    }
+
+    @Override
+    public User getData(String Id) {
+        String hql = "FROM user WHERE userName = :userName";
+        Query<User> query = session.createQuery(hql, User.class);
+        query.setParameter("userName", Id);
+        return query.uniqueResult();
     }
 }
