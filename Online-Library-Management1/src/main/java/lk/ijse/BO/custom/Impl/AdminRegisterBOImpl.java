@@ -6,7 +6,6 @@ import lk.ijse.DAO.custom.AdminDAO;
 import lk.ijse.config.SessionFactoryConfig;
 import lk.ijse.dto.AdminDto;
 import lk.ijse.entity.Admin;
-import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -19,28 +18,28 @@ public class AdminRegisterBOImpl implements AdminRegisterBO {
 
     private Transaction transaction;
     @Override
-    public boolean saveAdmin(AdminDto adminDto) throws SQLException {
+    public long saveAdmin(AdminDto adminDto) throws SQLException {
         session = SessionFactoryConfig.getInstance().getSession();
         adminDAO.setSession(session);
-        boolean saved = adminDAO.save(new Admin(adminDto.getId(),adminDto.getPassword(),adminDto.getName(),adminDto.getUserName(),adminDto.getEmail()));
+        long saved = adminDAO.save(new Admin(adminDto.getId(),adminDto.getPassword(),adminDto.getName(),adminDto.getUserName(),adminDto.getEmail()));
 
         transaction = session.beginTransaction();
         transaction.commit();
-        if (saved ) {
-            return true;
+        if (saved>0 ) {
+            return saved;
         } else {
             transaction.rollback();
-            return false;
+            return -1L;
         }
     }
 
     @Override
-    public boolean Register(AdminDto dto) throws SQLException {
+    public long Register(AdminDto dto) throws SQLException {
         session = SessionFactoryConfig.getInstance().getSession();
         adminDAO.setSession(session);
-        boolean saved = adminDAO.save(new Admin(dto.getId(),dto.getPassword(),dto.getName(),dto.getUserName(),dto.getEmail()));
+        long saved = adminDAO.save(new Admin(dto.getId(),dto.getPassword(),dto.getName(),dto.getUserName(),dto.getEmail()));
         transaction = session.beginTransaction();
-        if (saved ) {
+        if (saved>0 ) {
             transaction.commit();
 
         }

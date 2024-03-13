@@ -1,28 +1,33 @@
 package lk.ijse.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "admin")
 public class Admin {
     @Id
-    @Column(name = "id")
+    @Column(name = "Admin_Id")
     private Long id;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "admin_name")
+    @Column(name = "name")
     private String name;
 
-   @Column(name="admin_userName")
+   @Column(name="userName")
     private String Username;
 
     @Column(name = "Email")
     private String Email;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "Admin")
+    private List<Book> books=new ArrayList<>();
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "Admin")
+//    private List<Branch> branches = new ArrayList<>();
 
     public Admin(){}
 

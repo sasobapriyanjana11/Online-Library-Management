@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDAOImpl implements AdminDAO {
@@ -18,8 +17,8 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean save(Admin dto) throws SQLException {
-        return (boolean) session.save(dto);
+    public long save(Admin dto) throws SQLException {
+        return (long) session.save(dto);
     }
 
     @Override
@@ -29,7 +28,7 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean delete(String id) throws SQLException {
+    public boolean delete(long id) throws SQLException {
         Admin admin = session.get(Admin.class, id);
         session.delete(admin);
         return true;
@@ -57,9 +56,9 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public Admin getData(String Id) {
-        String hql = "FROM Admin WHERE admin_name = :name";
+        String hql = "FROM Admin WHERE userName = :userName";
         Query<Admin> query = session.createQuery(hql, Admin.class);
-        query.setParameter("name", Id);
+        query.setParameter("userName", Id);
         List<Admin> results = query.getResultList();
         if (!results.isEmpty()) {
             return results.get(0); // Matching admin found

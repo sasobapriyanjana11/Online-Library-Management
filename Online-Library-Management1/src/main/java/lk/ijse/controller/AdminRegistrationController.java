@@ -73,26 +73,31 @@ public class AdminRegistrationController implements Initializable {
         String userName=txtUserName.getText();
         boolean isUserNameValidated= Pattern.matches("[A-Za-z]+",userName);
 
-        String email=txtEmail.getText();
-        boolean isEmailValidated=Pattern.matches("([A-Za-z0-9]{3,}@[A-Za-z]{3,}\\.[A-Za-z]+)",email);
+//        String email=txtEmail.getText();
+//        boolean isEmailValidated=Pattern.matches("([A-Za-z0-9]{3,}@[A-Za-z]{3,}\\.[A-Za-z]+)",email);
 
         String password=txtPassword.getText();
         boolean isPasswordValidated=Pattern.matches("([ -~]{6,20})",password);
-
+        String cpassword=txtPassword.getText();
+        boolean iscPasswordValidated=Pattern.matches("([ -~]{6,20})",cpassword);
 
         if(!isUserNameValidated){
             new Alert(Alert.AlertType.ERROR,"invalid user name").show();
             txtUserName.requestFocus();
             return false;
-        }else if(!isEmailValidated){
-            new Alert(Alert.AlertType.ERROR,"invalid email").show();
-            txtEmail.requestFocus();
-            return  false;
-        }else if(!isPasswordValidated){
-            new Alert(Alert.AlertType.ERROR,"invalid password").show();
-            txtPassword.requestFocus();
-            return  false;
-        }
+        }//else if(!isEmailValidated){
+//            new Alert(Alert.AlertType.ERROR,"invalid email").show();
+//            txtEmail.requestFocus();
+//            return  false;
+//        }else if(!isPasswordValidated){
+//            new Alert(Alert.AlertType.ERROR,"invalid password").show();
+//            txtPassword.requestFocus();
+//            return  false;
+//        }else if(!iscPasswordValidated){
+//            new Alert(Alert.AlertType.ERROR,"invalid password").show();
+//            txtPassword.requestFocus();
+//            return  false;
+//        }
 
         else{
             return true;
@@ -116,9 +121,9 @@ public class AdminRegistrationController implements Initializable {
     }
 
     private void Register() throws IOException, SQLException {
-        boolean register =adminRegisterBO.Register(new AdminDto(1L,txtFullName.getText(),txtUserName.getText(),txtPassword.getText(),txtEmail.getText()));
+        long register =adminRegisterBO.Register(new AdminDto(1L,txtFullName.getText(),txtUserName.getText(),txtPassword.getText(),txtEmail.getText()));
 
-        if (register){
+        if (register>0){
 
             new Alert(Alert.AlertType.INFORMATION,"Admin Id is : A0"+register).show();
 
@@ -147,6 +152,7 @@ public class AdminRegistrationController implements Initializable {
         stage.show();
         Stage stage1 = (Stage) paneAdminRegistration.getScene().getWindow();
         stage1.close();
+
     }
 
     @FXML

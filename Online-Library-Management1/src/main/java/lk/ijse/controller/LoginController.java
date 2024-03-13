@@ -158,7 +158,6 @@ public class LoginController<aName> implements Initializable {
     }
 
 
-
     private void Admin_Register() {
         try{
             Parent root= FXMLLoader.load(this.getClass().getResource("/view/adminRegistration-form.fxml"));
@@ -173,9 +172,7 @@ public class LoginController<aName> implements Initializable {
             e.printStackTrace();
         }
 
-
     }
-
     private void User_Register() {
         try{
             Parent root= FXMLLoader.load(this.getClass().getResource("/view/userRegistration-form.fxml"));

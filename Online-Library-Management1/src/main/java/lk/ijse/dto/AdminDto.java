@@ -4,9 +4,7 @@ public class AdminDto {
 
     private Long id;
 
-
     private String password;
-
 
     private String name;
 

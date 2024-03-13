@@ -39,7 +39,7 @@ public class AdminLoginController {
         String Uname=txtUserName.getText();
 
         if(pw.equals(password) & Uname.equals(name)) {
-            Parent root = FXMLLoader.load(this.getClass().getResource("/view/user-management.fxml"));
+            Parent root = FXMLLoader.load(this.getClass().getResource("/view/adminDashboard-form.fxml"));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
