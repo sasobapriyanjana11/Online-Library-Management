@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneAdminRegistration" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminRegistrationController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="700.0">
+         <image>
+            <Image url="@../assets/lib-anime.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffdd1f8a" height="556.0" layoutX="49.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="603.0" />
+      <Label layoutX="212.0" layoutY="42.0" text="~Book Worm~">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="286.0" layoutY="78.0" text="Registration">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label layoutX="127.0" layoutY="164.0" text="Full name  :" />
+      <Label layoutX="124.0" layoutY="213.0" text="User name  :" />
+      <Label layoutX="128.0" layoutY="255.0" text="Password  :" />
+      <Label layoutX="127.0" layoutY="300.0" text="Confirm password:" />
+      <Label layoutX="127.0" layoutY="339.0" prefHeight="0.0" prefWidth="49.0" text="Email  :" />
+      <TextField fx:id="txtFullName" layoutX="248.0" layoutY="160.0" onAction="#txtFullNameOnAction" prefHeight="24.0" prefWidth="272.0" promptText="full name" />
+      <TextField fx:id="txtUserName" layoutX="248.0" layoutY="209.0" onAction="#txtUserNameOnAction" prefHeight="24.0" prefWidth="272.0" promptText="user name" />
+      <TextField fx:id="txtPassword" layoutX="248.0" layoutY="251.0" onAction="#txtPasswordOnAction" prefHeight="24.0" prefWidth="272.0" />
+      <TextField fx:id="txtConfirmPassword" layoutX="248.0" layoutY="296.0" onAction="#txtConfirmPasswordOnAction" prefHeight="24.0" prefWidth="272.0" />
+      <TextField fx:id="txtEmail" layoutX="248.0" layoutY="335.0" onAction="#txtEmailOnAction" prefHeight="24.0" prefWidth="272.0" promptText="email" />
+      <JFXButton fx:id="btnRegister" buttonType="RAISED" layoutX="301.0" layoutY="419.0" onAction="#btnRegisterOnAction" style="-fx-background-color: brown;" text="Register" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="276.0" layoutY="491.0" prefHeight="16.0" prefWidth="75.0" text="New User?" />
+      <Label fx:id="lblLogin" layoutX="351.0" layoutY="489.0" onMouseClicked="#lblLoginOnAction" prefHeight="16.0" prefWidth="93.0" text="Login" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="PasswordFild" layoutX="248.0" layoutY="251.0" prefHeight="24.0" prefWidth="272.0" promptText="password" />
+      <PasswordField fx:id="PasswordConfirm" layoutX="248.0" layoutY="296.0" prefHeight="24.0" prefWidth="272.0" promptText="confirmpassword" />
+      <Label layoutX="301.0" layoutY="109.0" text="For Admin" />
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="493.0" layoutY="251.0">
+         <image>
+            <Image url="@../assets/icons/icons8-show-password-48.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="viewPass" layoutX="488.0" layoutY="251.0" onAction="#viewPassOnAction" prefHeight="24.0" prefWidth="23.0" />
+      <JFXButton fx:id="viewConfirmPass" layoutX="488.0" layoutY="296.0" onAction="#viewConfirmPassOnAction" prefHeight="24.0" prefWidth="23.0" />
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="493.0" layoutY="296.0">
+         <image>
+            <Image url="@../assets/icons/icons8-show-password-48.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
