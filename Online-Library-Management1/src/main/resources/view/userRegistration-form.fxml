@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="paneUserRegistration" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserRegistrationController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="600.0" opacity="0.76">
@@ -57,7 +56,7 @@
       <PasswordField fx:id="PasswordFild" layoutX="245.0" layoutY="257.0" prefHeight="24.0" prefWidth="244.0" />
       <PasswordField fx:id="PasswordConfirm" layoutX="245.0" layoutY="305.0" prefHeight="24.0" prefWidth="244.0" />
       <TextField fx:id="txtPassword" layoutX="245.0" layoutY="257.0" onAction="#txtPasswordOnAction" prefHeight="24.0" prefWidth="244.0" promptText="password" />
-      <TextField fx:id="txtPasswordConfirm" layoutX="245.0" layoutY="305.0" onAction="#txtPasswordConfirmOnAction" prefHeight="24.0" prefWidth="244.0" promptText="confirm password" />
+      <TextField fx:id="txtPasswordConfirm" layoutX="246.0" layoutY="305.0" onAction="#txtPasswordConfirmOnAction" prefHeight="24.0" prefWidth="244.0" promptText="confirm password" />
       <JFXButton fx:id="btnRegister" buttonType="RAISED" layoutX="171.0" layoutY="379.0" onAction="#btnRegisterOnAction" prefHeight="31.0" prefWidth="263.0" style="-fx-background-color: brown;" text="Register" textFill="WHITE">
          <font>
             <Font size="19.0" />
@@ -73,14 +72,14 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="452.0" layoutY="257.0">
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="461.0" layoutY="257.0">
          <image>
             <Image url="@../assets/icons/icons8-show-password-48.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="viewPass" layoutX="447.0" layoutY="257.0" onAction="#viewPassOnAction" prefHeight="24.0" prefWidth="31.0" />
-      <JFXButton fx:id="viewConfirmPass" layoutX="448.0" layoutY="305.0" onAction="#viewConfirmPassOnAction" prefHeight="24.0" prefWidth="31.0" />
-      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="453.0" layoutY="305.0">
+      <JFXButton fx:id="viewPass" layoutX="454.0" layoutY="257.0" onAction="#viewPassOnAction" prefHeight="24.0" prefWidth="35.0" />
+      <JFXButton fx:id="viewConfirmPass" layoutX="448.0" layoutY="305.0" onAction="#viewConfirmPassOnAction" prefHeight="24.0" prefWidth="42.0" />
+      <ImageView fitHeight="24.0" fitWidth="22.0" layoutX="458.0" layoutY="305.0">
          <image>
             <Image url="@../assets/icons/icons8-show-password-48.png" />
          </image>

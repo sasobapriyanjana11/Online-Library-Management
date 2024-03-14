@@ -41,7 +41,9 @@ public class UserRegistrationController implements Initializable {
     private Label lblSignIn;
 
     @FXML
-    private AnchorPane paneUser;
+    private AnchorPane paneUserRegistration;
+
+
 
     @FXML
     private TextField txtEmail;
@@ -162,11 +164,12 @@ public class UserRegistrationController implements Initializable {
     }
 
     private void Register() throws SQLException, IOException {
-       long register = userRegisterBO.Register(new UserDto(1,txtUserName.getText(), PasswordFild.getText(), txtEmail.getText()));
+       long register = userRegisterBO.Register(new UserDto(1L,txtUserName.getText(), PasswordFild.getText(), txtEmail.getText()));
 
-        if (register !=-1L){
+        if (register >0){
 
             new Alert(Alert.AlertType.INFORMATION,"User Id is : "+register).show();
+            System.out.println(register);
 
             Parent root= FXMLLoader.load(this.getClass().getResource("/view/Login-Form.fxml"));
 
@@ -174,7 +177,7 @@ public class UserRegistrationController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-            Stage stage1 = (Stage) paneUser.getScene().getWindow();
+            Stage stage1 = (Stage) paneUserRegistration.getScene().getWindow();
             stage1.close();
 
         }
@@ -192,7 +195,7 @@ public class UserRegistrationController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        Stage stage1 = (Stage) paneUser.getScene().getWindow();
+        Stage stage1 = (Stage) paneUserRegistration.getScene().getWindow();
         stage1.close();
 
     }
