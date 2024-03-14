@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,11 +15,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.BO.custom.BookBO;
 import lk.ijse.BO.custom.Impl.BookBOImpl;
 import lk.ijse.dto.BookDto;
 import lk.ijse.dto.UserDto;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -34,6 +39,9 @@ public class BookManagementController {
 
     @FXML
     private JFXButton btnUpdate;
+
+    @FXML
+    private JFXButton btnBack;
 
     @FXML
     private TableColumn<?, ?> colAuthor;
@@ -95,7 +103,7 @@ public class BookManagementController {
         long id= Long.parseLong((txtBookId.getText()));
         try {
 
-            boolean isDeleted=bookBO.deleteBook(String.valueOf(id));
+            boolean isDeleted=bookBO.deleteBook(Long.parseLong(String.valueOf(id)));
             if(isDeleted){
                 tableBook.refresh();
                 new Alert(Alert.AlertType.CONFIRMATION,"Book details deleted successfully").show();
@@ -122,8 +130,8 @@ public class BookManagementController {
 
             try {
 
-                boolean isSaved=bookBO.saveBook(dto);
-                if (isSaved) {
+               long isSaved=bookBO.saveBook(dto);
+                if (isSaved>0) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Book Saved").showAndWait();
 
                     loadAllBook();
@@ -191,38 +199,68 @@ public class BookManagementController {
 
     private void setCellValueFactory() {
 
-        colBookId.setCellValueFactory(new PropertyValueFactory<>("book_id"));
-        colTitle.setCellValueFactory(new PropertyValueFactory<>("book_title"));
-        colAuthor.setCellValueFactory(new PropertyValueFactory<>("book's_author"));
-        colGenre.setCellValueFactory(new PropertyValueFactory<>("book_genre"));
-        colBookStatus.setCellValueFactory(new PropertyValueFactory<>("book_availableStatus"));
+        colBookId.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        colGenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        colBookStatus.setCellValueFactory(new PropertyValueFactory<>("availableStatus"));
 
 
     }
 
     private void loadAllBook() {
-        ObservableList<BookDto> obList = FXCollections.observableArrayList();
-
+//        ObservableList<BookDto> obList = FXCollections.observableArrayList();
+//
+//        try {
+//
+//            List<BookDto> dtoList=bookBO.getAllBook();
+//
+//            for(BookDto dto : dtoList) {
+//                obList.add(
+//                        new BookDto(
+//                                dto.getBookId(),
+//                                dto.getTitle(),
+//                                dto.getGenre(),
+//                                dto.getAuthor(),
+//                                dto.getAvailableStatus()
+//
+//                        )
+//                );
+//            }
+//            tableBook.setItems(obList);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        tableBook.getItems().clear();
+        ObservableList<BookDto> items= (ObservableList<BookDto>)tableBook.getItems();
         try {
+            /*Get all customers*/
+            List<BookDto> allBooks = bookBO.getAllBook();
+            System.out.println(allBooks);
 
-            List<BookDto> dtoList=bookBO.getAllBook();
-
-            for(BookDto dto : dtoList) {
-                obList.add(
-                        new BookDto(
-                                dto.getBookId(),
-                                dto.getTitle(),
-                                dto.getGenre(),
-                                dto.getAuthor(),
-                                dto.getAvailableStatus()
-
-                        )
-                );
+            for (BookDto b : allBooks) {
+                items.add(new BookDto(
+                                b.getBookId(),
+                                b.getTitle(),
+                                 b.getGenre(),
+                                 b.getAuthor(),
+                                b.getAvailableStatus()));
+                System.out.println(b.getBookId());
             }
-            tableBook.setItems(obList);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    void btnBackOnAction(ActionEvent event) throws IOException {
+        Parent root= FXMLLoader.load(this.getClass().getResource("/view/adminDashboard-form.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        Stage stage1 = (Stage) paneBookManagement.getScene().getWindow();
+        stage1.close();
     }
 
     @FXML

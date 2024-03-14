@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAOImpl implements BookDAO {
@@ -20,24 +21,49 @@ public class BookDAOImpl implements BookDAO {
     public BookDAOImpl(){
         session = SessionFactoryConfig.getInstance().getSession();
     }
-    @Override
-    public boolean save(Book book) throws SQLException {
 
-        session.save(book);
-        return true ;
+    @Override
+    public long save(Book book) throws SQLException {
+//        Session session = SessionFactoryConfig.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.save(book);
+//        transaction.commit();
+//        session.close();
+//        return true;
+//
+
+        return (long) session.save(book);
+
     }
 
     @Override
     public boolean update(Book book) throws SQLException {
-
+//        Session session = SessionFactoryConfig.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        session.update(book);
+//        transaction.commit();
+//        session.close();
+//        return true;
+//
         session.update(book);
         return true;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException {
-        session.delete(id);
-        return  true;
+    public boolean delete(long id) throws SQLException {
+//        Session session = SessionFactoryConfig.getInstance().getSession();
+//
+//        Transaction transaction = session.beginTransaction();
+//
+//        session.createNativeQuery("delete from book where id='"+id+"'",Book.class).executeUpdate();
+//
+//        transaction.commit();
+//        session.close();
+//        return true;
+
+        Book data = session.get(Book.class, id);
+        session.delete(data);
+        return true;
     }
 
     @Override
@@ -48,11 +74,17 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public List<Book> getAll() throws SQLException {
-        String sql = "SELECT B FROM book AS B";
-        Query query = session.createQuery(sql);
-        List<Book> list = query.list();
-        session.close();
-        return list;
+
+//        Session session =SessionFactoryConfig.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        List<Book> list = session.createNativeQuery("SELECT * FROM book", Book.class).list();
+//        transaction.commit();
+//        session.close();
+//        return list;
+
+        String sql = "SELECT B FROM Book AS B";
+        Query queue = session.createQuery(sql);
+        return (ArrayList<Book>) queue.list();
 
     }
 
