@@ -41,7 +41,7 @@ public class UserRegistrationController implements Initializable {
     private Label lblSignIn;
 
     @FXML
-    private AnchorPane paneUserRegistration;
+    private AnchorPane paneUser;
 
     @FXML
     private TextField txtEmail;
@@ -73,25 +73,25 @@ public class UserRegistrationController implements Initializable {
         String userName=txtUserName.getText();
         boolean isUserNameValidated=Pattern.matches("[A-Za-z]+",userName);
 
-        String email=txtEmail.getText();
-        boolean isEmailValidated=Pattern.matches("([A-Za-z0-9]{3,}@[A-Za-z]{3,}\\.[A-Za-z]+)",email);
-
-        String password=txtPassword.getText();
-        boolean isPasswordValidated=Pattern.matches("([ -~]{6,20})",password);
+//        String email=txtEmail.getText();
+//        boolean isEmailValidated=Pattern.matches("([A-Za-z0-9]{3,}@[A-Za-z]{3,}\\.[A-Za-z]+)",email);
+//
+//        String password=txtPassword.getText();
+//        boolean isPasswordValidated=Pattern.matches("([ -~]{6,20})",password);
 
 
          if(!isUserNameValidated){
             new Alert(Alert.AlertType.ERROR,"invalid user name").show();
             txtUserName.requestFocus();
             return false;
-        }else if(!isEmailValidated){
-             new Alert(Alert.AlertType.ERROR,"invalid email").show();
-             txtEmail.requestFocus();
-             return  false;
-         }else if(!isPasswordValidated){
-             new Alert(Alert.AlertType.ERROR,"invalid password").show();
-             txtPassword.requestFocus();
-             return  false;
+//        }else if(!isEmailValidated){
+//             new Alert(Alert.AlertType.ERROR,"invalid email").show();
+//             txtEmail.requestFocus();
+//             return  false;
+//         }else if(!isPasswordValidated){
+//             new Alert(Alert.AlertType.ERROR,"invalid password").show();
+//             txtPassword.requestFocus();
+//             return  false;
          }
 
         else{
@@ -113,62 +113,6 @@ public class UserRegistrationController implements Initializable {
         else {
             new Alert(Alert.AlertType.ERROR,"Invalid Input").show();
         }
-
-    }
-
-    private void Register() throws SQLException, IOException {
-       boolean register = userRegisterBO.Register(new UserDto(1,txtUserName.getText(), PasswordFild.getText(), txtEmail.getText()));
-
-        if (register){
-
-            new Alert(Alert.AlertType.INFORMATION,"User Id is : U0"+register).show();
-
-            Parent root= FXMLLoader.load(this.getClass().getResource("/view/Login-Form.fxml"));
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            Stage stage1 = (Stage) paneUserRegistration.getScene().getWindow();
-            stage1.close();
-
-        }
-        else {
-            new Alert(Alert.AlertType.INFORMATION,"Not Complete").show();
-        }
-
-    }
-
-    @FXML
-    void lblSignInOnAction(MouseEvent event) throws IOException {
-        Parent root= FXMLLoader.load(this.getClass().getResource("/view/Login-Form.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-        Stage stage1 = (Stage) paneUserRegistration.getScene().getWindow();
-        stage1.close();
-
-    }
-
-    @FXML
-    void txtEmailOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtPasswordConfirmOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtPasswordOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtUserNameOnAction(ActionEvent event) {
 
     }
 
@@ -216,5 +160,62 @@ public class UserRegistrationController implements Initializable {
         txtPassword.setVisible(false);
         txtPasswordConfirm.setVisible(false);
     }
+
+    private void Register() throws SQLException, IOException {
+       long register = userRegisterBO.Register(new UserDto(1,txtUserName.getText(), PasswordFild.getText(), txtEmail.getText()));
+
+        if (register !=-1L){
+
+            new Alert(Alert.AlertType.INFORMATION,"User Id is : "+register).show();
+
+            Parent root= FXMLLoader.load(this.getClass().getResource("/view/Login-Form.fxml"));
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            Stage stage1 = (Stage) paneUser.getScene().getWindow();
+            stage1.close();
+
+        }
+        else {
+            new Alert(Alert.AlertType.INFORMATION,"Not Complete").show();
+        }
+
+    }
+
+    @FXML
+    void lblSignInOnAction(MouseEvent event) throws IOException {
+        Parent root= FXMLLoader.load(this.getClass().getResource("/view/Login-Form.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        Stage stage1 = (Stage) paneUser.getScene().getWindow();
+        stage1.close();
+
+    }
+
+    @FXML
+    void txtEmailOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtPasswordConfirmOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtPasswordOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtUserNameOnAction(ActionEvent event) {
+
+    }
+
 }
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneUser" prefHeight="605.0" prefWidth="600.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserManagementController">
+   <children>
+      <ImageView fitHeight="587.0" fitWidth="577.0" layoutX="12.0" layoutY="10.0" onMouseClicked="#btnLogOutOnAction">
+         <image>
+            <Image url="@../assets/lib-1.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="170.0" layoutY="37.0" prefHeight="30.0" prefWidth="257.0" text="User Management " textFill="#fad800">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffbf1f94" height="233.0" layoutX="55.0" layoutY="90.0" stroke="BLACK" strokeType="INSIDE" width="492.0" />
+      <Label layoutX="98.0" layoutY="127.0" text="User ID       :" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="177.0" prefHeight="20.0" prefWidth="105.0" text="User Name  :" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="265.0" prefHeight="20.0" prefWidth="105.0" text="Email          :" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="96.0" layoutY="223.0" text="Password    :" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUserId" layoutX="212.0" layoutY="127.0" onAction="#txtUserIdOnAction" promptText="User ID" />
+      <TextField fx:id="txtUserName" layoutX="212.0" layoutY="175.0" onAction="#txtUserNameOnAction" promptText="User Name" />
+      <TextField fx:id="txtPassword" layoutX="212.0" layoutY="221.0" onAction="#txtPasswordOnAction" promptText="Password" />
+      <TextField fx:id="txtEmail" layoutX="212.0" layoutY="263.0" onAction="#txtEmailOnAction" promptText="Email" />
+      <TableView fx:id="tableRegistration" layoutX="55.0" layoutY="347.0" prefHeight="200.0" prefWidth="492.0">
+         <columns>
+            <TableColumn fx:id="colUserId" prefWidth="87.0" text="User_Id" />
+            <TableColumn fx:id="colName" prefWidth="124.0" text="Name" />
+            <TableColumn fx:id="colPassword" prefWidth="141.0" text="Password" />
+            <TableColumn fx:id="colEmail" prefWidth="137.0" text="Email" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="425.0" layoutY="127.0" onAction="#btnSaveOnAction" prefHeight="24.0" prefWidth="81.0" style="-fx-background-color: brown;" text="Save" textFill="WHITE" />
+      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="425.0" layoutY="175.0" onAction="#btnUpdateOnAction" prefHeight="24.0" prefWidth="81.0" style="-fx-background-color: brown;" text="Update" textFill="WHITE" />
+      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="425.0" layoutY="221.0" onAction="#btnDeleteOnAction" prefHeight="24.0" prefWidth="81.0" style="-fx-background-color: brown;" text="Delete" textFill="WHITE" />
+      <JFXButton fx:id="btnClear" buttonType="RAISED" layoutX="425.0" layoutY="263.0" onAction="#btnClearOnAction" prefHeight="24.0" prefWidth="81.0" style="-fx-background-color: brown;" text="Clear" textFill="WHITE" />
+      <JFXButton fx:id="btnBack" buttonType="RAISED" layoutX="446.0" layoutY="557.0" onAction="#btnBackOnAction" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: grey;" text="Back" textFill="WHITE" />
+      <ImageView fitHeight="20.0" fitWidth="24.0" layoutX="518.0" layoutY="559.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/icons8-log-out-50(1).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

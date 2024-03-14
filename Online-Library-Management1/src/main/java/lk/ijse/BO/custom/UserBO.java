@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface UserBO extends SuperBO {
 
-    boolean saveUser(UserDto dto) throws SQLException;
+    long saveUser(UserDto dto) throws SQLException;
 
 
     boolean updateUser(UserDto dto) throws SQLException ;
 
 
-    boolean deleteUser(String id) throws SQLException ;
+    boolean deleteUser(long id) throws SQLException ;
 
 
     UserDto searchUser(String id) throws SQLException ;

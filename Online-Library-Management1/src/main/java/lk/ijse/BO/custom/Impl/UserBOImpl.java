@@ -15,27 +15,52 @@ import java.util.List;
 
 public class UserBOImpl implements UserBO {
     private Session session;
+    Transaction transaction;
 
     UserDAO userDAO= (UserDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.getTypes.USER);
 
 
     @Override
-    public boolean saveUser(UserDto dto) throws SQLException {
+    public long saveUser(UserDto dto) throws SQLException {
+        session = SessionFactoryConfig.getInstance().getSession();
+        userDAO.setSession(session);
+        long saved =  userDAO.save(new User(dto.getUserId(),dto.getUserName(), dto.getPassword(), dto.getEmail()));
+        transaction = session.beginTransaction();
+        transaction.commit();
+        if (saved>0) {
+            return saved;
+        }
+        else {
+            transaction.rollback();
+            return -1L;
+        }
 
-        return userDAO.save(new User(dto.getUserId(), dto.getUserName(), dto.getPassword(), dto.getEmail()));
+//        return userDAO.save(new User(dto.getUserId(), dto.getUserName(), dto.getPassword(), dto.getEmail()));
 
     }
 
     @Override
     public boolean updateUser(UserDto dto) throws SQLException {
+        session = SessionFactoryConfig.getInstance().getSession();
+        userDAO.setSession(session);
+        userDAO.update(new User(dto.getUserId(), dto.getUserName(), dto.getPassword(), dto.getEmail()));
+        transaction = session.beginTransaction();
+        transaction.commit();
+        return true;
 
-        return userDAO.update(new User(dto.getUserId(), dto.getUserName(), dto.getPassword(), dto.getEmail()));
+//        return userDAO.update(new User(dto.getUserId(), dto.getUserName(), dto.getPassword(), dto.getEmail()));
 
     }
 
     @Override
-    public boolean deleteUser(String id) throws SQLException {
-        return userDAO.delete(id);
+    public boolean deleteUser(long id) throws SQLException {
+        session = SessionFactoryConfig.getInstance().getSession();
+        userDAO.setSession(session);
+       userDAO.delete(id);
+        transaction = session.beginTransaction();
+        transaction.commit();
+        return true;
+//        return userDAO.delete(id);
 
     }
 
@@ -56,14 +81,14 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public List<UserDto> getAllUser() throws SQLException {
-
-
+        session = SessionFactoryConfig.getInstance().getSession();
         List<UserDto> allUsers= new ArrayList<>();
         List<User> all = userDAO.getAll();
         for (User u : all) {
             allUsers.add(new UserDto(u.getUserId(),u.getUserName(),u.getPassword(),u.getEmail()));
         }
         return allUsers;
+
 
     }
 }

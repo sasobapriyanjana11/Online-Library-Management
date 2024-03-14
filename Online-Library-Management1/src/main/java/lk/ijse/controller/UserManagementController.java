@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.BO.custom.Impl.UserBOImpl;
@@ -20,11 +21,16 @@ import lk.ijse.BO.custom.UserBO;
 import lk.ijse.dto.UserDto;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class RegistrationController {
+public class UserManagementController {
+
+
+    @FXML
+    private JFXButton btnBack;
 
     @FXML
     private JFXButton btnClear;
@@ -94,7 +100,7 @@ public class RegistrationController {
         long id= Long.parseLong((txtUserId.getText()));
         try {
 
-            boolean isDeleted=userBO.deleteUser(String.valueOf(id));
+            boolean isDeleted=userBO.deleteUser(Long.parseLong(String.valueOf(id)));
             if(isDeleted){
                 tableRegistration.refresh();
                 new Alert(Alert.AlertType.CONFIRMATION,"User deleted successfully").show();
@@ -121,8 +127,8 @@ public class RegistrationController {
 
             try {
 
-                boolean isSaved=userBO.saveUser(dto);
-                if (isSaved) {
+                long isSaved=userBO.saveUser(dto);
+                if (isSaved>0) {
                     new Alert(Alert.AlertType.CONFIRMATION, "User Saved").showAndWait();
                     loadAllUser();
                 }
@@ -160,7 +166,6 @@ public class RegistrationController {
             new Alert(Alert.AlertType.ERROR, "User details are incorrect,can't update").show();
         }
 
-
     }
 
     private boolean ValidateUser(){
@@ -190,40 +195,67 @@ public class RegistrationController {
 
     private void setCellValueFactory() {
 
-        colUserId.setCellValueFactory(new PropertyValueFactory<>("user_id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("user_name"));
-        colPassword.setCellValueFactory(new PropertyValueFactory<>("user_password"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("user_email"));
+        colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
 
 
     }
 
     private void loadAllUser() {
-
-        ObservableList<UserDto> obList = FXCollections.observableArrayList();
-
+//
+//        ObservableList<UserDto> obList = FXCollections.observableArrayList();
+//
+//        try {
+//
+//            List<UserDto> dtoList=userBO.getAllUser();
+//
+//            for(UserDto dto : dtoList) {
+//                obList.add(
+//                        new UserDto(
+//                                dto.getUserId(),
+//                                dto.getUserName(),
+//                                dto.getPassword(),
+//                                dto.getEmail()
+//
+//                        )
+//                );
+//            }
+//            tableRegistration.setItems(obList);
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        tableRegistration.getItems().clear();
+        ObservableList<UserDto> items= (ObservableList<UserDto>)tableRegistration.getItems();
         try {
+            /*Get all customers*/
+            List<UserDto> allUsers = userBO.getAllUser();
+            System.out.println(allUsers);
 
-            List<UserDto> dtoList=userBO.getAllUser();
-
-            for(UserDto dto : dtoList) {
-                obList.add(
-                        new UserDto(
-                                dto.getUserId(),
-                                dto.getUserName(),
-                                dto.getPassword(),
-                                dto.getEmail()
-
-                        )
-                );
+            for (UserDto u : allUsers) {
+                items.add(new UserDto(u.getUserId(),u.getUserName(),u.getPassword(),u.getEmail()));
+                System.out.println(u.getEmail());
             }
-            tableRegistration.setItems(obList);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+
+    @FXML
+    void btnBackOnAction(ActionEvent event) throws IOException {
+        Parent root= FXMLLoader.load(this.getClass().getResource("/view/adminDashboard-form.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        Stage stage1 = (Stage) paneRegistration.getScene().getWindow();
+        stage1.close();
+
+    }
     @FXML
     void txtEmailOnAction(ActionEvent event) {
 
@@ -241,6 +273,17 @@ public class RegistrationController {
     @FXML
     void txtUserNameOnAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnLogOutOnAction(MouseEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(this.getClass().getResource("view/Login-Form.fxml"));
+//        Scene scene = new Scene(root);
+//        Stage stage = new Stage();
+//        stage.setScene(scene);
+//        stage.show();
+        Stage stage1 = (Stage) paneRegistration.getScene().getWindow();
+        stage1.close();
     }
 
 }

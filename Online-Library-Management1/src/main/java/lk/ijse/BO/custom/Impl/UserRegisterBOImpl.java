@@ -17,29 +17,28 @@ public class UserRegisterBOImpl implements UserRegisterBO {
     private Session session;
     private Transaction transaction;
     @Override
-    public boolean saveUser(UserDto userDto) throws SQLException {
+    public long saveUser(UserDto userDto) throws SQLException {
         session= SessionFactoryConfig.getInstance().getSession();
         userDAO.setSession(session);
-        boolean isSaved=userDAO.save(new User(userDto.getUserId(),userDto.getUserName(),userDto.getPassword(),userDto.getEmail()));
+        long isSaved=userDAO.save(new User(userDto.getUserId(),userDto.getUserName(),userDto.getPassword(),userDto.getEmail()));
         transaction=session.beginTransaction();
-        if(isSaved){
+        if(isSaved>0){
             transaction.commit();
+           return  isSaved;
 
-            return true;
         }else{
             transaction.rollback();
-
-            return  false;
+            return -1L;
         }
     }
 
     @Override
-    public boolean Register(UserDto dto) throws SQLException {
+    public long Register(UserDto dto) throws SQLException {
         session = SessionFactoryConfig.getInstance().getSession();
         userDAO.setSession(session);
-        boolean saved = userDAO.save(new User(dto.getUserId(),dto.getUserName(),dto.getPassword(),dto.getEmail()));
+        long saved = userDAO.save(new User(dto.getUserId(),dto.getUserName(),dto.getPassword(),dto.getEmail()));
         transaction = session.beginTransaction();
-        if (saved ) {
+        if (saved>0 ) {
             transaction.commit();
 
         }
