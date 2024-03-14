@@ -23,8 +23,8 @@ public class Admin {
     @Column(name = "Email")
     private String Email;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "Admin")
-    private List<Book> books=new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "Admin")
+//    private List<Book> books=new ArrayList<>();
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "Admin")
 //    private List<Branch> branches = new ArrayList<>();

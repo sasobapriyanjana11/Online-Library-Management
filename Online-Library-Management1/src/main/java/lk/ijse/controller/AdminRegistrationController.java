@@ -155,30 +155,7 @@ public class AdminRegistrationController implements Initializable {
 
     }
 
-    @FXML
-    void txtConfirmPasswordOnAction(ActionEvent event) {
 
-    }
-
-    @FXML
-    void txtEmailOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtFullNameOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtPasswordOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtUserNameOnAction(ActionEvent event) {
-
-    }
 
     @FXML
     void viewConfirmPassOnAction(ActionEvent event) {
@@ -224,5 +201,30 @@ public class AdminRegistrationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
        txtPassword.setVisible(false);
        txtConfirmPassword.setVisible(false);
+    }
+
+    @FXML
+    void txtConfirmPasswordOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtEmailOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtFullNameOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtPasswordOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtUserNameOnAction(ActionEvent event) {
+
     }
 }
