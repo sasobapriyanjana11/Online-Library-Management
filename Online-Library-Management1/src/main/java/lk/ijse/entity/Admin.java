@@ -1,11 +1,18 @@
 package lk.ijse.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "admin")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin {
     @Id
     @Column(name = "Admin_Id")
@@ -23,61 +30,20 @@ public class Admin {
     @Column(name = "Email")
     private String Email;
 
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "Admin")
-//    private List<Book> books=new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "admin")
+    private List<Book> books=new ArrayList<>();
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "Admin")
-//    private List<Branch> branches = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "admin")
+    private List<Branch> branches = new ArrayList<>();
 
-    public Admin(){}
-
-    public Admin(Long id, String password, String name, String username, String email) {
-        this.id = id;
-        this.password = password;
-        this.name = name;
-        Username = username;
-        Email = email;
+    public Admin(Long id, String password, String name, String userName, String email) {
+        this.id=id;
+        this.password=password;
+        this.name=name;
+        this.Username=userName;
+        this.Email=email;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
 
     @Override
     public String toString() {
